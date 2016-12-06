@@ -1,11 +1,16 @@
-import React from 'react';
+import React, {PropTypes} from 'react';
 import { connect } from 'react-redux';
 import GamesList from './GamesList';
+import {fetchGames} from './actions';
 
 
 const GamesPage = React.createClass({
 	propTypes: {
-		games: React.PropTypes.array.isRequired
+		games: React.PropTypes.array.isRequired,
+		fetchGames: PropTypes.func.isRequired
+	},
+	componentDidMount() {
+		this.props.fetchGames();
 	},
 	render() {
 		return (
@@ -24,4 +29,4 @@ function mapStateToProps(state) {
 	}
 }
 
-export default connect(mapStateToProps)(GamesPage);
+export default connect(mapStateToProps, {fetchGames})(GamesPage);
